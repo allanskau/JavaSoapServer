@@ -16,24 +16,21 @@ import java.util.Date;
  */
 public class Voo implements Serializable{
     
-    private final String companhiaAerea;
+    
     private final Date data;
     private final String origem;
     private final String destino;
-    private final int nVagas;
+    private final double valor;
+    private int vagas;
 
-    public Voo(String companhiaAerea, Date data, String origem, String destino, int nVagas) {
-        this.companhiaAerea = companhiaAerea;
+    public Voo(String origem, String destino, double valor, Date data, int nVagas) {    
         this.data = data;
         this.origem = origem;
         this.destino = destino;
-        this.nVagas = nVagas;
+        this.valor = valor;
+        this.vagas = nVagas;
     }
-
-    public String getCompanhiaAerea() {
-        return companhiaAerea;
-    }
-
+    
     public Date getData() {
         return data;
     }
@@ -46,13 +43,21 @@ public class Voo implements Serializable{
         return destino;
     }
 
-    public int getnVagas() {
-        return nVagas;
+    public int getVagas() {
+        return vagas;
+    }
+    public boolean consumirVagas(int quantidade){
+        if (this.vagas>=quantidade)
+        {
+            this.vagas -= quantidade;
+            return true;
+        }
+        return false;
     }
     
     @Override
     public String toString(){
-        return "Companhia: " + companhiaAerea + " Data: " + data + " Origem: " + origem + " destino: " + destino + " Vagas: " + nVagas;
+        return " Data: " + data.toLocaleString() + " Origem: " + origem + " Valor: " + valor +" destino: " + destino + " Vagas: " + vagas;
     }
     
 }
