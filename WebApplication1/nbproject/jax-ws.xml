@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
-    <service name="ServicoTurismo">
-      <implementation-class>servicoturismo.org.ServicoTurismo</implementation-class>
+    <service name="HospedagemWebService">
+      <implementation-class>servicoturismo.org.HospedagemWebService</implementation-class>
+    </service>
+    <service name="VoosWebService">
+      <implementation-class>servicoturismo.org.VoosWebService</implementation-class>
     </service>
   </services>
   <clients/>
