@@ -57,7 +57,10 @@ public class Voo implements Serializable{
     
     @Override
     public String toString(){
-        return " Data: " + data.toLocaleString() + " Origem: " + origem + " Valor: " + valor +" destino: " + destino + " Vagas: " + vagas;
+        return origem + "-" + destino + "-" + data.toLocaleString().split(" ")[0] + "-" + valor +"-" + vagas;
+    }
+    public String toString(int id){
+        return id +"-" + origem + "-" + destino + "-" + data.toLocaleString().split(" ")[0] + "-" + valor +"-" + vagas;
     }
     
 }

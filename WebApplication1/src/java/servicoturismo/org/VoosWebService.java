@@ -24,27 +24,30 @@ public class VoosWebService {
     private final List<Voo> lista = new ArrayList<>();
     public VoosWebService() {
         
-        for (int i = 1; i<31; i++){
-            lista.add(new Voo("Curitiba", "Salvador", 350.28, new Date(2018-1900, 07, i),20));
-            lista.add(new Voo("Curitiba", "São Paulo", 220.48, new Date(2018-1900, 07, i), 5));
-            lista.add(new Voo("Curitiba", "Rio de Janeiro", 250.37, new Date(2018-1900, 07, i), 10));
-            lista.add(new Voo("Curitiba", "Brasilia", 327.99, new Date(2018-1900, 07, i), 20));
-            lista.add(new Voo("São Paulo", "Salvador", 230.28, new Date(2018-1900, 07, i), 40));
-            lista.add(new Voo("São Paulo", "Curitiba", 220.48, new Date(2018-1900, 07, i), 5));
-            lista.add(new Voo("São Paulo", "Rio de Janeiro", 150.28, new Date(2018-1900, 07, i), 2));
-            lista.add(new Voo("São Paulo", "Brasilia", 180.28, new Date(2018-1900, 07, i), 2));
-            lista.add(new Voo("Salvador", "Curitiba", 329.28, new Date(2018-1900, 07, i), 6));
-            lista.add(new Voo("Salvador", "São Paulo", 230.28, new Date(2018-1900, 07, i), 3));
-            lista.add(new Voo("Salvador", "Rio de Janeiro", 180.28, new Date(2018-1900, 07, i), 8));
-            lista.add(new Voo("Salvador", "Brasilia", 180.28, new Date(2018-1900, 07, i), 5));
-            lista.add(new Voo("Brasilia", "Curitiba", 249.37, new Date(2018-1900, 07, i), 0));
-            lista.add(new Voo("Brasilia", "São Paulo", 150.28, new Date(2018-1900, 07, i), 20));
-            lista.add(new Voo("Brasilia", "Rio de Janeiro", 140.28, new Date(2018-1900, 07, i), 10));
-            lista.add(new Voo("Brasilia", "Salvador", 290.28, new Date(2018-1900, 07, i), 4));
-            lista.add(new Voo("Rio de Janeiro", "Curitiba", 249.37, new Date(2018-1900, 07, i), 8));
-            lista.add(new Voo("Rio de Janeiro", "São Paulo", 150.28, new Date(2018-1900, 07, i), 10));
-            lista.add(new Voo("Rio de Janeiro", "Brasilia", 140.28, new Date(2018-1900, 07, i), 5));
-            lista.add(new Voo("Rio de Janeiro", "Salvador", 290.28, new Date(2018-1900, 07, i), 6));
+        for (int i = 15; i<30; i++){
+            for(int j = 5; j<8; j++)
+            {
+            lista.add(new Voo("Curitiba", "Salvador", 350.28, new Date(2018-1900, j, i),20));
+            lista.add(new Voo("Curitiba", "São Paulo", 220.48, new Date(2018-1900, j, i), 5));
+            lista.add(new Voo("Curitiba", "Rio de Janeiro", 250.37, new Date(2018-1900, j, i), 10));
+            lista.add(new Voo("Curitiba", "Brasilia", 327.99, new Date(2018-1900, j, i), 20));
+            lista.add(new Voo("São Paulo", "Salvador", 230.28, new Date(2018-1900, j, i), 40));
+            lista.add(new Voo("São Paulo", "Curitiba", 220.48, new Date(2018-1900, j, i), 5));
+            lista.add(new Voo("São Paulo", "Rio de Janeiro", 150.28, new Date(2018-1900, j, i), 2));
+            lista.add(new Voo("São Paulo", "Brasilia", 180.28, new Date(2018-1900, j, i), 2));
+            lista.add(new Voo("Salvador", "Curitiba", 329.28, new Date(2018-1900, j, i), 6));
+            lista.add(new Voo("Salvador", "São Paulo", 230.28, new Date(2018-1900, j, i), 3));
+            lista.add(new Voo("Salvador", "Rio de Janeiro", 180.28, new Date(2018-1900, j, i), 8));
+            lista.add(new Voo("Salvador", "Brasilia", 180.28, new Date(2018-1900, j, i), 5));
+            lista.add(new Voo("Brasilia", "Curitiba", 249.37, new Date(2018-1900, j, i), 0));
+            lista.add(new Voo("Brasilia", "São Paulo", 150.28, new Date(2018-1900, j, i), 20));
+            lista.add(new Voo("Brasilia", "Rio de Janeiro", 140.28, new Date(2018-1900, j, i), 10));
+            lista.add(new Voo("Brasilia", "Salvador", 290.28, new Date(2018-1900, j, i), 4));
+            lista.add(new Voo("Rio de Janeiro", "Curitiba", 249.37, new Date(2018-1900, j, i), 8));
+            lista.add(new Voo("Rio de Janeiro", "São Paulo", 150.28, new Date(2018-1900, j, i), 10));
+            lista.add(new Voo("Rio de Janeiro", "Brasilia", 140.28, new Date(2018-1900, j, i), 5));
+            lista.add(new Voo("Rio de Janeiro", "Salvador", 290.28, new Date(2018-1900, j, i), 6));
+            }
         }
         
     }
@@ -107,8 +110,15 @@ public class VoosWebService {
      * @return String - lista de voos em uma String concatenada
      */
     @WebMethod(operationName = "obterVoos")
-    public List<Voo> obterVoos() {
-        return lista;
+    public List<String> obterVoos() {
+        ArrayList<String> listaQuery = new ArrayList();
+        int i = 1;
+         for (Voo v : lista){ 
+             listaQuery.add(v.toString(i));
+             i++;
+         }
+        
+        return listaQuery;
     }
 
     /**
@@ -123,21 +133,21 @@ public class VoosWebService {
      * @return String - lista de voos em uma String concatenada
      */
     @WebMethod(operationName = "consultarVoos")
-    public String consultarVoos (String origem, String destino, String dataS, int qtdmenores, int qtdmaiores ){
-        //ArrayList<Voo> listaQuery = new ArrayList();
+    public  ArrayList<String> consultarVoos (String origem, String destino, String dataS, int qtdmenores, int qtdmaiores ){
+        ArrayList<String> listaQuery = new ArrayList();
         String[] p = dataS.split("/");
         Date data = new Date(Integer.parseInt(p[2])-1900, Integer.parseInt(p[1])-1, Integer.parseInt(p[0]));
-        String ret= "";
+        //String ret= "";
         int id = 1;
         for (Voo v : lista){              
             
             if((v.getOrigem().equals(origem))&&(v.getDestino().equals(destino))&&(v.getVagas()>=qtdmaiores+qtdmenores)&&(v.getData().equals(data))){
                 //listaQuery.add(v);
-                ret += id + " " + v.toString() + ". ";
+                listaQuery.add(v.toString(id));
             }
             id++;
         }
-       return ret;
+       return listaQuery;
     }
     @WebMethod(operationName = "reservarPassagem")
     public boolean reservarPassagem (int id, int quantidade){              
