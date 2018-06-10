@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 
 /**
  *
@@ -56,25 +57,7 @@ public class VoosWebService {
      *
      * @param novoVoo
      */
-    //@WebMethod(operationName = "inserirVoo")
-    public void inserirVoo(String novoVoo) {
-        //             0       1        2        3        4
-        // novoVoo = data - origem - destino - valor - nVagas
-        String[] msgDividida = novoVoo.split("-");
-        String dt = msgDividida[0];
-        Date data = null;
-        try {
-            data = new SimpleDateFormat("dd/MM/yyyy").parse(dt);
-        } catch (ParseException ex) {
-            System.out.println("Erro ao converter String para data");
-        }
-        String origem = msgDividida[2];
-        Double valor = Double.parseDouble(msgDividida[3]);
-        String destino = msgDividida[4];
-        int nVagas = Integer.parseInt(msgDividida[4]);
-        Voo novo = new Voo(origem, destino, valor, data, nVagas);
-        lista.add(novo);
-    }
+    
 
     /**
      * This is a sample web service operation
@@ -132,7 +115,7 @@ public class VoosWebService {
      * @return String - lista de voos em uma String concatenada
      */
     @WebMethod(operationName = "consultarVoos")
-    public  ArrayList<String> consultarVoos (String origem, String destino, String dataS, int qtdmenores, int qtdmaiores ){
+    public  ArrayList<String> consultarVoos (@WebParam(name = "origem") String origem, @WebParam(name = "destino") String destino, @WebParam(name = "data") String dataS, @WebParam(name = "menores") int qtdmenores, @WebParam(name = "maiores") int qtdmaiores ){
         ArrayList<String> listaQuery = new ArrayList();
         String[] p = dataS.split("/");
         Date data = new Date(Integer.parseInt(p[2])-1900, Integer.parseInt(p[1])-1, Integer.parseInt(p[0]));
@@ -149,11 +132,11 @@ public class VoosWebService {
        return listaQuery;
     }
     @WebMethod(operationName = "reservarPassagem")
-    public boolean reservarPassagem (int id, int quantidade, int cartao, int parcelamento){              
+    public boolean reservarPassagem (@WebParam(name = "idVoo") int id,@WebParam(name = "quantidade") int quantidade,@WebParam(name = "cartao")  int cartao, @WebParam(name = "parcelamento") int parcelamento){              
        return lista.get(id-1).consumirVagas(quantidade, cartao, parcelamento);
     }
     @WebMethod(operationName = "ExibirReservas")
-    public List<String> getReservas(int idVoo){
+    public List<String> getReservas(@WebParam(name = "voo") int idVoo){
         List<Reserva> reservasVoo = lista.get(idVoo-1).getReservas();
         List<String> ret = new ArrayList();
         for(Reserva r : reservasVoo){
@@ -177,6 +160,22 @@ public class VoosWebService {
         }
             
         return ret;
+    }
+    //@WebMethod(operationName = "inserirVoo")
+    public void inserirVoo(String origem, String destino, String dataVoo, double valor, String vagas) {
+        //             0       1        2        3        4
+        // novoVoo = data - origem - destino - valor - nVagas
+        
+        String dt = dataVoo;
+        Date data = null;
+        try {
+            data = new SimpleDateFormat("dd/MM/yyyy").parse(dt);
+        } catch (ParseException ex) {
+            System.out.println("Erro ao converter String para data");
+        }
+        int nVagas = Integer.parseInt(vagas);
+        Voo novo = new Voo(origem, destino, valor, data, nVagas);
+        lista.add(novo);
     }
     
     /*public String consultarVoos(String origem, String destino, String data, String nPassageiros, List<String> idade) {
