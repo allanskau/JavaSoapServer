@@ -2,7 +2,9 @@ package servicoturismo.org;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,6 +24,7 @@ public class Voo implements Serializable{
     private final String destino;
     private final double valor;
     private int vagas;
+    private List<Reserva> reservas;
 
     public Voo(String origem, String destino, double valor, Date data, int nVagas) {    
         this.data = data;
@@ -29,6 +32,7 @@ public class Voo implements Serializable{
         this.destino = destino;
         this.valor = valor;
         this.vagas = nVagas;
+        this.reservas = new ArrayList();
     }
     
     public Date getData() {
@@ -46,13 +50,22 @@ public class Voo implements Serializable{
     public int getVagas() {
         return vagas;
     }
-    public boolean consumirVagas(int quantidade){
+    public boolean consumirVagas(int quantidade, int cartao, int parcelamento){
         if (this.vagas>=quantidade)
         {
             this.vagas -= quantidade;
+            this.reservas.add(new Reserva(reservas.size(), cartao, quantidade, parcelamento));
             return true;
         }
         return false;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
     }
     
     @Override

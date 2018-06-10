@@ -150,9 +150,20 @@ public class VoosWebService {
        return listaQuery;
     }
     @WebMethod(operationName = "reservarPassagem")
-    public boolean reservarPassagem (int id, int quantidade){              
-       return lista.get(id-1).consumirVagas(quantidade);
+    public boolean reservarPassagem (int id, int quantidade, int cartao, int parcelamento){              
+       return lista.get(id-1).consumirVagas(quantidade, cartao, parcelamento);
     }
+    @WebMethod(operationName = "ExibirReservas")
+    public List<String> getReservas(int idVoo){
+        List<Reserva> reservasVoo = lista.get(idVoo-1).getReservas();
+        List<String> ret = new ArrayList();
+        for(Reserva r : reservasVoo){
+            String nova = r.toString();
+            ret.add(nova);
+        }
+        return ret;
+    }
+    
     /*public String consultarVoos(String origem, String destino, String data, String nPassageiros, List<String> idade) {
         if (lista.size() > 0) {
             Date d = null;
