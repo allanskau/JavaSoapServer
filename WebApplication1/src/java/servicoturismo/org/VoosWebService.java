@@ -21,9 +21,9 @@ import javax.jws.WebParam;
 @WebService(serviceName = "ServicoTurismo")
 public class VoosWebService {
 
-    private final List<Voo> lista = new ArrayList<>();
+    private final List<Voo> lista;
     public VoosWebService() {
-        
+        lista  = new ArrayList<>();
         for (int i = 15; i<30; i++){
             for(int j = 5; j<8; j++)
             {
@@ -64,7 +64,7 @@ public class VoosWebService {
      *
      * @return String - lista de voos em uma String concatenada
      */
-    @WebMethod(operationName = "listarVoos")
+    /*@WebMethod(operationName = "listarVoos")
     public String listarVoos() {
         if (lista.size() > 0) {
             Voo v = null;
@@ -84,7 +84,7 @@ public class VoosWebService {
         } else {
             return "Nao existem voos cadastrados!";
         }
-    }
+    }*/
 
     /**
      * This is a sample web service operation
