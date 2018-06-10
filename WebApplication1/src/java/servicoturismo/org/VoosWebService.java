@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
 
 /**
  *
@@ -161,6 +160,22 @@ public class VoosWebService {
             String nova = r.toString();
             ret.add(nova);
         }
+        return ret;
+    }
+    @WebMethod(operationName = "ExibirTodasReservas")
+    public List<String> getTodasReservas(){
+        
+        List<String> ret = new ArrayList();
+        int i = 0;
+        for(Voo v : lista){
+            i++;
+            List<Reserva> reservasVoo = v.getReservas();
+            for(Reserva r : reservasVoo){
+                String nova = r.toString();
+                ret.add(i + " - " + nova);
+            }
+        }
+            
         return ret;
     }
     
