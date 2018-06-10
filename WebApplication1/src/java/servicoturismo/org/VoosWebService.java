@@ -132,7 +132,7 @@ public class VoosWebService {
        return listaQuery;
     }
     @WebMethod(operationName = "reservarPassagem")
-    public boolean reservarPassagem (@WebParam(name = "idVoo") int id,@WebParam(name = "quantidade") int quantidade,@WebParam(name = "cartao")  int cartao, @WebParam(name = "parcelamento") int parcelamento){              
+    synchronized public boolean reservarPassagem (@WebParam(name = "idVoo") int id,@WebParam(name = "quantidade") int quantidade,@WebParam(name = "cartao")  int cartao, @WebParam(name = "parcelamento") int parcelamento){              
        return lista.get(id-1).consumirVagas(quantidade, cartao, parcelamento);
     }
     @WebMethod(operationName = "ExibirReservas")
