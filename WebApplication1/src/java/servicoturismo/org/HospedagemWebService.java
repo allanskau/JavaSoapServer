@@ -87,8 +87,8 @@ public class HospedagemWebService {
      * @param pessoas
      * @return 
      */
-    @WebMethod(operationName = "consultaPorNome")
-    public List<String> consultaPorNome(@WebParam(name = "nome") String nome, @WebParam(name = "dataEntrada") String dataEntrada, @WebParam(name = "dataSaida") String dataSaida, @WebParam(name = "pessoas") int pessoas) {
+    @WebMethod(operationName = "consultaPorHotel")
+    public List<String> consultaPorHotel(@WebParam(name = "nome") String nome, @WebParam(name = "dataEntrada") String dataEntrada, @WebParam(name = "dataSaida") String dataSaida, @WebParam(name = "pessoas") int pessoas) {
         ArrayList<String> listaQuery = new ArrayList();
         String[] p = dataEntrada.split("/");
         Date dataE = new Date(Integer.parseInt(p[2])-1900, Integer.parseInt(p[1])-1, Integer.parseInt(p[0]));
@@ -113,19 +113,21 @@ public class HospedagemWebService {
      * @param pessoas quantidade de pessoas cadastradas
      * @param dataEntrada data da entrada
      * @param dataSaida data da saida
+     * @param cartao
+     * @param parcelamento
      * @return  booleano diz respeito a reserva efetuada ou não
      * @throws servicoturismo.org.ErroDiaException
      */
     @WebMethod(operationName = "reserva")
-    synchronized public boolean reserva(@WebParam(name = "idHotel") int idHotel, @WebParam(name = "pessoas") int pessoas, @WebParam(name = "dataEntrada") String dataEntrada, @WebParam(name = "dataSaida") String dataSaida) throws ErroDiaException {
+    synchronized public boolean reserva(@WebParam(name = "idHotel") int idHotel, @WebParam(name = "pessoas") int pessoas, @WebParam(name = "dataEntrada") String dataEntrada, @WebParam(name = "dataSaida") String dataSaida, @WebParam(name = "cartao") int cartao, @WebParam(name = "parcelamento") int parcelamento) throws ErroDiaException {
         String[] p = dataEntrada.split("/");
         Date dataE = new Date(Integer.parseInt(p[2])-1900, Integer.parseInt(p[1])-1, Integer.parseInt(p[0]));
         String[] s = dataSaida.split("/");
         Date dataS = new Date(Integer.parseInt(s[2])-1900, Integer.parseInt(s[1])-1, Integer.parseInt(s[0]));
         //String ret= "";
         
-        Hotel h = lista.get(idHotel);            
-        return h.reservaQuartos(pessoas, pessoas, pessoas, dataE, dataS);
+        Hotel h = lista.get(idHotel-1);            
+        return h.reservaQuartos(pessoas, cartao, parcelamento, dataE, dataS);
         
     }
 
