@@ -50,7 +50,7 @@ public class Voo implements Serializable{
     public int getVagas() {
         return vagas;
     }
-    public boolean consumirVagas(int quantidade, int cartao, int parcelamento){
+    synchronized public boolean consumirVagas(int quantidade, int cartao, int parcelamento){
         if (this.vagas>=quantidade)
         {
             this.vagas -= quantidade;

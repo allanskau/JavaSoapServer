@@ -119,7 +119,7 @@ public class HospedagemWebService {
      * @throws servicoturismo.org.ErroDiaException
      */
     @WebMethod(operationName = "reserva")
-    synchronized public boolean reserva(@WebParam(name = "idHotel") int idHotel, @WebParam(name = "pessoas") int pessoas, @WebParam(name = "dataEntrada") String dataEntrada, @WebParam(name = "dataSaida") String dataSaida, @WebParam(name = "cartao") int cartao, @WebParam(name = "parcelamento") int parcelamento) throws ErroDiaException {
+    public boolean reserva(@WebParam(name = "idHotel") int idHotel, @WebParam(name = "pessoas") int pessoas, @WebParam(name = "dataEntrada") String dataEntrada, @WebParam(name = "dataSaida") String dataSaida, @WebParam(name = "cartao") int cartao, @WebParam(name = "parcelamento") int parcelamento) throws ErroDiaException {
         String[] p = dataEntrada.split("/");
         Date dataE = new Date(Integer.parseInt(p[2])-1900, Integer.parseInt(p[1])-1, Integer.parseInt(p[0]));
         String[] s = dataSaida.split("/");
